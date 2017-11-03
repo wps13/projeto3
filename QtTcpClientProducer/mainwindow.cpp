@@ -54,24 +54,27 @@ void MainWindow::putData(){
         msecdate = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
 
-        str = "set "+ QString::number(msecdate) + " " + QString::number(qrand()% ui->horizontalSliderMax->value()
-                                                                        + ui->horizontalSliderMin->value())+"\r\n";
+        str = "set "+ QString::number(msecdate) + " " + QString::number(qrand()% (ui->horizontalSliderMax->value()
+                                                                        + ui->horizontalSliderMin->value())) + "\r\n";
 
         qDebug() << str;
         qDebug() << socket->write(str.toStdString().c_str()) << " bytes written";
+
+
         if(socket->waitForBytesWritten(3000)){
             qDebug() << "wrote";
         }
     }
+
 }
 
 //desconecta do servidor
 void MainWindow::Disconnect()
 {
     socket->disconnectFromHost();
-
-    //criar debug para testar se realmente foi desconectado
 }
+
+//TIMER NÃO ESTÁ INICIANDO
 
 //inicia o timer
 void MainWindow::start()
@@ -80,6 +83,7 @@ void MainWindow::start()
     qDebug ()<< "Timer Started";
 }
 
+
 //define o que vai ser feito pelo QTimer durante execução(chamar o putData)
 void MainWindow::timerEvent(QTimer *e)
 {
@@ -87,7 +91,7 @@ void MainWindow::timerEvent(QTimer *e)
     qDebug() << "Sending Data";
 }
 
-//finaliza o timer
+//finaliza o timer,reiniciando-o para evitar erros
 void MainWindow::stop()
 {
     killTimer(timer);
@@ -95,9 +99,7 @@ void MainWindow::stop()
     qDebug() << "Timer Killed";
 }
 
-
-
-
+//destrutor da MainWindow
 MainWindow::~MainWindow(){
     delete socket;
     delete ui;
