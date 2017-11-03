@@ -77,19 +77,25 @@ void MainWindow::Disconnect()
 void MainWindow::start()
 {
     timer = startTimer(ui->horizontalSliderTiming->value()*1000);
-}
-
-//finaliza o timer
-void MainWindow::stop()
-{
-    socket->killTimer(timer);
+    qDebug ()<< "Timer Started";
 }
 
 //define o que vai ser feito pelo QTimer durante execução(chamar o putData)
 void MainWindow::timerEvent(QTimer *e)
 {
     putData();
+    qDebug() << "Sending Data";
 }
+
+//finaliza o timer
+void MainWindow::stop()
+{
+    killTimer(timer);
+    timer=0;
+    qDebug() << "Timer Killed";
+}
+
+
 
 
 MainWindow::~MainWindow(){
