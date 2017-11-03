@@ -20,7 +20,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QTextEdit" name="textEditIP">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -93,7 +93,7 @@
              <enum>QLayout::SetFixedSize</enum>
             </property>
             <item>
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="labelMin">
               <property name="text">
                <string>Min</string>
               </property>
@@ -116,7 +116,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QSlider" name="horizontalSlider_2">
+           <widget class="QSlider" name="horizontalSliderMax">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -128,14 +128,14 @@
              <enum>QLayout::SetFixedSize</enum>
             </property>
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="labelMax">
               <property name="text">
                <string>Max</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLCDNumber" name="lcdNumber_2">
+             <widget class="QLCDNumber" name="lcdNumberMax">
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
@@ -166,14 +166,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="labelTiming">
           <property name="text">
            <string>Timing(s)</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSlider" name="horizontalSlider_3">
+         <widget class="QSlider" name="horizontalSliderTiming">
           <property name="maximum">
            <number>5</number>
           </property>
@@ -183,7 +183,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="labelTimingNum">
           <property name="text">
            <string>0</string>
           </property>
@@ -207,14 +207,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QPushButton" name="pushButtonPut">
+         <widget class="QPushButton" name="pushButtonStart">
           <property name="text">
            <string>Start</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButtonStop">
           <property name="text">
            <string>Stop</string>
           </property>
@@ -282,9 +282,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider_2</sender>
+   <sender>horizontalSliderMax</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>lcdNumber_2</receiver>
+   <receiver>lcdNumberMax</receiver>
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -298,9 +298,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider_3</sender>
+   <sender>horizontalSliderTiming</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>label_4</receiver>
+   <receiver>labelTimingNum</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
