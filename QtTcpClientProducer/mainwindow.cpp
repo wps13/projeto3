@@ -96,8 +96,6 @@ void MainWindow::start()
     qDebug ()<< "Timer Started";
 }
 
-//NÃO ESTÁ EXECUTANDO
-
 //define o que vai ser feito pelo QTimer durante execução(chamar o putData)
 void MainWindow::timerEvent(QTimerEvent *e)
 {
