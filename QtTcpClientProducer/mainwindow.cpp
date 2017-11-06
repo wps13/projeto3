@@ -4,31 +4,47 @@
 #include <QTextBrowser>
 #include <QString>
 
+/**
+ * @brief MainWindow::MainWindow Janela Principal, onde tudo será executado
+ * @param parent
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
     socket = new QTcpSocket(this);
     tcpConnect();
 
-    //faz o tratamento para a ação de clicar no botão 'Start'
+
+    /**
+     * @brief connect faz o tratamento para a ação de clicar no botão 'Start'
+     */
     connect(ui->pushButtonStart,
             SIGNAL(clicked(bool)),
             this,
             SLOT(start()));
 
-    //faz o tratamento para a ação de clicar no botão 'Connect'
+
+    /**
+     * @brief connect faz o tratamento para a ação de clicar no botão 'Connect'
+     */
     connect(ui->pushButtonConnect,
             SIGNAL(clicked(bool)),
             this,
             SLOT(tcpConnect()));
 
-    //faz o tratamento para a ação de clicar no botão 'Disconnect'
+
+    /**
+     * @brief connect faz o tratamento para a ação de clicar no botão 'Disconnect'
+     */
     connect(ui->pushButtonDisconnect,
             SIGNAL(clicked(bool)),
             this,
             SLOT(Disconnect()));
 
-    //faz o tratamento para a ação de clicar no botão 'Stop'
+
+    /**
+     * @brief connect faz o tratamento para a ação de clicar no botão 'Stop'
+     */
     connect(ui->pushButtonStop,
             SIGNAL(clicked(bool)),
             this,
@@ -37,7 +53,9 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 
-//faz a conexão do ip dado pelo usuário à porta '1234'
+/**
+ * @brief MainWindow::tcpConnect faz a conexão do ip dado pelo usuário à porta '1234'
+ */
 void MainWindow::tcpConnect(){
 
     socket->connectToHost(ui->textEditIP->toPlainText(),1234);
@@ -54,7 +72,9 @@ void MainWindow::tcpConnect(){
     }
 }
 
-
+/**
+ * @brief MainWindow::putData Envia os dados ao Servidor
+ */
 void MainWindow::putData(){
     QDateTime datetime;
     QString str;
@@ -83,27 +103,38 @@ void MainWindow::putData(){
 
 }
 
-//desconecta do servidor
+/**
+ * @brief MainWindow::Disconnect Desconecta o IP do servidor
+ */
 void MainWindow::Disconnect()
 {
     socket->disconnectFromHost();
 }
 
-//inicia o timer
+/**
+ * @brief MainWindow::start Inicia o timer
+ */
 void MainWindow::start()
 {
     timer = startTimer(ui->horizontalSliderTiming->value()*1000);
     qDebug ()<< "Timer Started";
 }
 
-//define o que vai ser feito pelo QTimer durante execução(chamar o putData)
+
+/**
+ * @brief MainWindow::timerEvent Define o que vai ser feito pelo QTimer durante execução(chamar o putData)
+ * @param e
+ */
 void MainWindow::timerEvent(QTimerEvent *e)
 {
     putData();
     qDebug() << "Sending Data";
 }
 
-//finaliza o timer,reiniciando-o para evitar erros
+
+/**
+ * @brief MainWindow::stop finaliza o timer,reiniciando-o para evitar erros
+ */
 void MainWindow::stop()
 {
     killTimer(timer);
@@ -111,8 +142,9 @@ void MainWindow::stop()
     qDebug() << "Timer Killed";
 }
 
-
-//destrutor da MainWindow
+/**
+ * @brief MainWindow::~MainWindow Destrutor da MainWindow
+ */
 MainWindow::~MainWindow(){
     delete socket;
     delete ui;
