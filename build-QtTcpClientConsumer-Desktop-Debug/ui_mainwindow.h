@@ -40,7 +40,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout;
     QLabel *labelIP;
-    QLineEdit *lineEdit;
+    QLineEdit *lineEditIP;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonConnect;
     QPushButton *pushButtonDisconnect;
@@ -84,10 +84,10 @@ public:
 
         verticalLayout->addWidget(labelIP);
 
-        lineEdit = new QLineEdit(centralWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEditIP = new QLineEdit(centralWidget);
+        lineEditIP->setObjectName(QStringLiteral("lineEditIP"));
 
-        verticalLayout->addWidget(lineEdit);
+        verticalLayout->addWidget(lineEditIP);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);

@@ -53,12 +53,14 @@ void Plotter::paintEvent(QPaintEvent *event)
     int x1,x2,y1,y2;
 
     //define a cor e tipo do preenchimento do fundo da tela
-    brush.setColor(QColor(255,255,100));
+    //brush.setColor(QColor(255,255,100));
+    brush.setColor(QColor(51,51,51));
 
     brush.setStyle(Qt::SolidPattern);
 
     //define a cor da borda da tela
-    pen.setColor(QColor(255,0,0));
+    //pen.setColor(QColor(255,0,0));
+    pen.setColor(QColor(153,153,153));
 
     //define a largura da borda
     pen.setWidth(2);
@@ -76,7 +78,9 @@ void Plotter::paintEvent(QPaintEvent *event)
     */
 
     //define a cor das linhas da tela
-    pen.setColor(QColor(0,0,255));
+
+    //pen.setColor(QColor(0,0,255));
+    pen.setColor(QColor(255,255,255));
     painter.setPen(pen);
 
     //ALTERAR AS VARIAVÉIS DE FORMA QUE O GRÁFICO SEJA DO TEMPO X VALOR DO SERVIDOR

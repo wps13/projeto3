@@ -21,7 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonConnect,
             SIGNAL(clicked(bool)),
             this,
-            SLOT(tcpConnect());
+            SLOT(tcpConnect()));
+
             connect(ui->pushButtonDisconnect,
                     SIGNAL(clicked(bool)),
                     this,
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 }
+
 /**
  * @brief MainWindow::tcpConnect Conecta-se ao IP dado
  */
@@ -85,10 +87,11 @@ void MainWindow::getData(){
         if(socket->isOpen()){
             qDebug() << "reading...";
 
-            //socket->write("get 127.0.0.1 5\r\n");
+            socket->write("get 127.0.0.1 5\r\n");
 
+            //DEU ERRO
             //acho que esse 5 seria o valor aleatório do servidor, ALTERAR
-            socket->write("get " + ui->lineEditIP->text() + "5" +"\r\n");
+            //socket->write("get " + ui->lineEditIP->text() + "5" +"\r\n");
 
             socket->waitForBytesWritten();
             socket->waitForReadyRead();
