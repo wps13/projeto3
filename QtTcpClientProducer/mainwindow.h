@@ -26,7 +26,7 @@ private slots:
     void Disconnect();
     void start();
     void stop();
-    void timerEvent(QTimer *e);
+    void timerEvent(QTimerEvent *e);
 
 private:
     Ui::MainWindow *ui;

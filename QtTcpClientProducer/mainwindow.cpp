@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDateTime>
-
+#include <QTextBrowser>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow){
@@ -16,13 +17,22 @@ MainWindow::MainWindow(QWidget *parent) :
             SLOT(start()));
 
     //faz o tratamento para a ação de clicar no botão 'Connect'
-    connect(ui->pushButtonConnect,SIGNAL(clicked(bool)),this,SLOT(tcpConnect()));
+    connect(ui->pushButtonConnect,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(tcpConnect()));
 
     //faz o tratamento para a ação de clicar no botão 'Disconnect'
-    connect(ui->pushButtonDisconnect,SIGNAL(clicked(bool)),this,SLOT(Disconnect()));
+    connect(ui->pushButtonDisconnect,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(Disconnect()));
 
     //faz o tratamento para a ação de clicar no botão 'Stop'
-    connect(ui->pushButtonStop,SIGNAL(clicked(bool)),this,SLOT(stop()));
+    connect(ui->pushButtonStop,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(stop()));
 
 }
 
@@ -35,6 +45,7 @@ void MainWindow::tcpConnect(){
     if(socket->waitForConnected(3000))
     {
         qDebug() << "Connected";
+        ui->textBrowser->append("Connect");
     }
 
     else
@@ -48,19 +59,23 @@ void MainWindow::putData(){
     QDateTime datetime;
     QString str;
     qint64 msecdate;
+    int min,max;
+
+
+    min=ui->horizontalSliderMin->value();
+    max=ui->horizontalSliderMax->value();
 
     if(socket->state()== QAbstractSocket::ConnectedState){
 
         msecdate = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
-
-        str = "set "+ QString::number(msecdate) + " " + QString::number(qrand()% (ui->horizontalSliderMax->value()
-                                                                        + ui->horizontalSliderMin->value())) + "\r\n";
+        str = "set "+ QString::number(msecdate) + " " + QString::number(qrand()% max + min) + "\r\n";
 
         qDebug() << str;
         qDebug() << socket->write(str.toStdString().c_str()) << " bytes written";
 
 
+        ui->textBrowser->append(str);
         if(socket->waitForBytesWritten(3000)){
             qDebug() << "wrote";
         }
@@ -74,8 +89,6 @@ void MainWindow::Disconnect()
     socket->disconnectFromHost();
 }
 
-//TIMER NÃO ESTÁ INICIANDO
-
 //inicia o timer
 void MainWindow::start()
 {
@@ -83,9 +96,10 @@ void MainWindow::start()
     qDebug ()<< "Timer Started";
 }
 
+//NÃO ESTÁ EXECUTANDO
 
 //define o que vai ser feito pelo QTimer durante execução(chamar o putData)
-void MainWindow::timerEvent(QTimer *e)
+void MainWindow::timerEvent(QTimerEvent *e)
 {
     putData();
     qDebug() << "Sending Data";
@@ -98,6 +112,7 @@ void MainWindow::stop()
     timer=0;
     qDebug() << "Timer Killed";
 }
+
 
 //destrutor da MainWindow
 MainWindow::~MainWindow(){
