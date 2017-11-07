@@ -48,7 +48,7 @@ void MainWindow::tcpConnect(){
     socket->connectToHost(ui->lineEditIP->text(),1234);
     if(socket->waitForConnected(3000)){
         qDebug() << "Connected";
-    }
+        }
     else{
         qDebug() << "Disconnected";
     }
