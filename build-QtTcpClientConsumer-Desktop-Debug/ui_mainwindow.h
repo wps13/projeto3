@@ -18,12 +18,12 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -44,7 +44,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonConnect;
     QPushButton *pushButtonDisconnect;
-    QTextBrowser *textBrowser;
+    QListWidget *listWidget;
     QPushButton *pushButtonUpdate;
     QVBoxLayout *verticalLayout_2;
     QLabel *labelTiming;
@@ -108,10 +108,10 @@ public:
 
         verticalLayout_3->addLayout(verticalLayout);
 
-        textBrowser = new QTextBrowser(centralWidget);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
 
-        verticalLayout_3->addWidget(textBrowser);
+        verticalLayout_3->addWidget(listWidget);
 
         pushButtonUpdate = new QPushButton(centralWidget);
         pushButtonUpdate->setObjectName(QStringLiteral("pushButtonUpdate"));
